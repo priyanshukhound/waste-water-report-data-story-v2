@@ -128,6 +128,13 @@ body.pon #scene #mp,body.skon #scene #kt,body.ixon.pon #scene #mp,#scene #mp,#sc
 .stpc{display:grid;grid-template-columns:1fr 1fr;gap:18px}.stpc svg{display:block;width:100%;height:auto;overflow:visible}.stpc p{margin:6px 0 0;text-align:center;font:600 13px var(--f-head);letter-spacing:.02em}.stpc>div:first-child p{color:#2f7d36}.stpc>div:last-child p{color:var(--navy)}
 @media (max-width:860px){.stpb{padding:6px 12px;font-size:12px}.stpb b{font-size:24px}.stpc{gap:8px}.stpc p{font-size:10px}.chwrap{gap:10px}}
 .rl{margin:14px 0 0;font:600 11px var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--m)}
+.bars div.hasn{}
+#tbars div{grid-template-columns:120px 1fr 0}#tbars .sn{all:unset;cursor:pointer;color:var(--t);border-bottom:1px dotted var(--m);padding:2px 0}#tbars .sn:hover,#tbars .sn:focus-visible{color:var(--h);border-bottom-color:var(--e)}
+#tbars div{position:relative}#tbars em{position:absolute;right:0;top:-26px;background:#fff;color:#202733;padding:3px 8px;border-radius:3px;box-shadow:0 6px 16px -4px rgba(0,0,0,.5);white-space:nowrap;text-align:left;font-size:12px;opacity:0;transform:translateY(6px) scale(.85);transform-origin:100% 100%;transition:opacity .25s,transform .25s;pointer-events:none;z-index:2}
+#tbars em small{display:block;font-weight:400;font-size:10.5px;color:#5d6872}
+#tbars div.on em{opacity:1;transform:none}#tbars div.on b{height:8px}
+@media (max-width:860px){#tbars div{grid-template-columns:100px 1fr 0}}
+.pp{transform-box:fill-box;transform-origin:center;animation:ppop .7s ease-out forwards}@keyframes ppop{0%{transform:scale(1)}45%{transform:scale(2.6)}100%{transform:scale(1.5)}}
 </style>
 <div id="ph"></div><div id="ov"></div>
 <div id="scene"><div id="mp">
@@ -332,7 +339,7 @@ const steps=[
  {bg:'p4',v:'map',sk:3,hi:1,a:A({roads:.9,con:1}),cap:'Roads over new construction sites in Bengaluru',lg:[dot(PAL.rust,'Construction'),ln(PAL.dark,'Primary and trunk'),ln('#5d6672','Tertiary')]},
  {bg:'p4',v:'map',sk:4,a:A({roads:.7,lakes:1,parks:1}),cap:'Lakes and green spaces in Bengaluru',lg:[pg(PAL.blue,'Lakes'),pg(PAL.green,'Green spaces'),ln(PAL.road,'Roads')]},
  {bg:'p4',v:'pot'},
- {bg:'p4',v:'map',ix:1,a:A({roads:.9,cov:1,snk:1}),cap:capDef,lg:[`<i class="pg" style="background:repeating-linear-gradient(45deg,#3aa84a 0 1px,#eaf5ea 1px 4px);border:1px solid #3aa84a"></i>On-site STP coverage (2 km)`,dot('#7b8a80','Sinks: construction sites'),ln(PAL.road,'Roads'),`<i class="pg" style="background:none;border:1.5px solid #111"></i>Bengaluru Urban district`]}];
+ {bg:'p4',v:'map',ix:1,a:A({roads:.9,lakes:1,parks:1,cov:1,snk:1}),cap:capDef,lg:[pg(PAL.blue,'Lakes'),pg(PAL.green,'Parks and green spaces'),`<i class="pg" style="background:repeating-linear-gradient(45deg,#3aa84a 0 1px,#eaf5ea 1px 4px);border:1px solid #3aa84a"></i>On-site STP coverage (2 km)`,dot('#7b8a80','Sinks: construction sites'),ln(PAL.road,'Roads'),`<i class="pg" style="background:none;border:1.5px solid #111"></i>Bengaluru Urban district`]}];
 const PH={p1:'img/p1.jpg',p2:'img/p2.jpg',p3:'img/p3.jpg',p4:'img/p4.jpg',p5:'img/p5.jpg'};
 const phl=document.getElementById('ph');
 phl.innerHTML=Object.entries(PH).map(([k,u])=>`<div class="pi" data-k="${k}" style="background-image:url(${u})"></div>`).join('');
@@ -358,11 +365,16 @@ function playTable(){tt.classList.remove('in');tt.querySelectorAll('s').forEach(
  requestAnimationFrame(()=>{tt.classList.add('in');tt.querySelectorAll('s').forEach((s,i)=>{s.style.transition='';s.style.transitionDelay=(.4+i*.3)*K+'s';s.style.width=s.dataset.w+'%'})})}
 // --- stacked sink charts (Table 3.2 rows, MLD): current sink coloured, earlier ones grey, stacked one by one
 const SK=[{g:0,n:'Residential',c:PAL.yellow,v:[212,603],dk:1},{g:1,n:'Industrial',c:PAL.violet,v:[155,335]},{g:2,n:'Commercial',c:PAL.blue,v:[134,249]},{g:3,n:'Construction',c:PAL.rust,v:[108,200]},{g:4,n:'Greening',c:'#7cc686',v:[35,80],dk:1},{g:4,n:'Lakes',c:'#bfe0f5',v:[35,245],lk:1}];
+let KG=null;
+function secPop(i,on){const sv=KG&&KG.svg;if(!sv)return;sv.selectAll('.sp').remove();if(!on)return;const v=tb[i][1],tot=155,w0=155*KG.sc,x0=KG.x0+212*KG.sc;let off=0;for(let j=0;j<i;j++)off+=tb[j][1];const sx=x0+off/tot*w0,sw=Math.max(2,v/tot*w0),y=KG.top,gp=sv.append('g').attr('class','sp');
+ gp.append('rect').attr('x',sx).attr('y',y-2).attr('width',sw).attr('height',KG.bh+4).attr('fill','#fff').attr('fill-opacity',.9).attr('stroke','#fcbf2e').attr('stroke-width',1.5).attr('opacity',0).transition().duration(250).attr('opacity',1);
+ const lb=tb[i][0]+' '+v+' MLD',tx=Math.min(Math.max(sx+sw/2,60),KG.x0+2*0+SKMAX*KG.sc),ty=y+KG.bh+KG.gap/2+4;
+ const t=gp.append('text').attr('x',sx+sw/2).attr('y',ty-6).attr('text-anchor','middle').attr('font-size',KG.fs).attr('font-weight',700).attr('font-family','Montserrat,Arial').attr('fill','#fcbf2e').attr('opacity',0).text(lb);t.transition().duration(300).ease(d3.easeBackOut).attr('y',ty).attr('opacity',1)}
 const SKMAX=d3.max([0,1],r=>d3.sum(SK.filter(x=>!x.lk),x=>x.v[r])),LKMAX=245,LKGAP=0; // lakes are a separate bar, outside the totals
 function stackChart(box,upto,o){
  box.html('');const W=o.w,bw=W-o.x0-o.pad,H=o.top*2+o.bh*2+o.gap,sc=bw/(SKMAX+LKGAP+LKMAX),segs=SK.filter(x=>x.g<=upto);
- const sv=box.append('svg').attr('viewBox',`0 0 ${W} ${H}`).attr('role','img').attr('aria-label','Stacked bar chart of recycled-water demand by sink, 2025 and 2035');
- [0,1].forEach(r=>{const y=o.top+r*(o.bh+o.gap);let cum=0,lw=0;
+ KG={x0:o.x0,sc,top:o.top,bh:o.bh,gap:o.gap,fs:o.fs,svg:null};const sv=box.append('svg').attr('viewBox',`0 0 ${W} ${H}`).attr('role','img').attr('aria-label','Stacked bar chart of recycled-water demand by sink, 2025 and 2035');
+ KG.svg=sv;[0,1].forEach(r=>{const y=o.top+r*(o.bh+o.gap);let cum=0,lw=0;
   sv.append('text').attr('x',0).attr('y',y+o.bh/2+4).attr('font-size',o.fs).attr('font-weight',600).attr('font-family','Montserrat,Arial').attr('fill',o.txt).text(r?'2035':'2025');
   segs.forEach((x,i)=>{let x0=o.x0+cum*sc;const on=o.all||x.g===upto,w=x.v[r]*sc,inst=o.only&&x.g<upto,d=o.only?250:300+i*420;if(!x.lk)cum+=x.v[r];if(x.lk)lw=x.v[r];
    const rc=sv.append('rect').attr('x',x0).attr('y',y).attr('height',o.bh).attr('width',inst?w:0).attr('fill',x.lk?(on?'#bfe0f5':o.grey):on?x.c:o.grey).attr('stroke',x.lk?'#2f86d6':o.sep).attr('stroke-dasharray',x.lk?'3 2':null).attr('stroke-width',1);if(!inst)rc.transition().delay(d).duration(520).ease(d3.easeCubicOut).attr('width',w);
@@ -389,13 +401,16 @@ function playStp(){bars('#st1',[['Sequencing|Batch|Reactor',150],['Activated|Slu
  bars('#st2',[['<80',59],['80-250',87],['>250',48]],PAL.navy,100,[0,25,50,75,100],'Capacity (kilolitres per day)')}
 // --- last map: click a 2 km circle to highlight it and the construction sites inside it
 function nearApt(x,y){let b=-1,bd=1e9;AP.forEach((p,i)=>{const d=Math.hypot(p[0]-x,p[1]-y);if(d<bd){bd=d;b=i}});return bd<=R2?b:-1}
+function ppSet(x,y,all){const fx=all?null:R2;['lakes','parks'].forEach(k=>g[k].selectAll('path').each(function(){const t=this;if(!t.__c){const b=t.getBBox();t.__c=[b.x+b.width/2,b.y+b.height/2]}
+  const inn=!all&&Math.hypot(t.__c[0]-x,t.__c[1]-y)<=R2;t.__in=inn;d3.select(t).classed('pp',inn).interrupt('hl').transition('hl').duration(300).attr('opacity',all||inn?1:.1)}))}
+function ppCount(k){let n=0;g[k].selectAll('path').each(function(){if(this.__in)n++});return n}
 function setPick(i){sel=i;const capEl=document.getElementById('cap');
- if(i<0){ixc.interrupt().transition().duration(250).attr('r',0);g.cov.transition('hl').duration(300).attr('opacity',.9*0+1);snk.transition('hl').duration(300).attr('fill','#7b8a80').attr('fill-opacity',.75).attr('r',R.snk);capEl.textContent=capDef;return}
+ if(i<0){ixc.interrupt().transition().duration(250).attr('r',0);g.cov.transition('hl').duration(300).attr('opacity',.9*0+1);snk.transition('hl').duration(300).attr('fill','#7b8a80').attr('fill-opacity',.75).attr('r',R.snk);ppSet(0,0,true);capEl.textContent=capDef;return}
  const [x,y]=AP[i],ins=CP.map(p=>Math.hypot(p[0]-x,p[1]-y)<=R2),n=ins.filter(Boolean).length;
  ixc.attr('cx',x).attr('cy',y).interrupt().attr('r',0).transition().duration(450).ease(d3.easeCubicOut).attr('r',R2);
  g.cov.transition('hl').duration(300).attr('opacity',.3);
  snk.transition('hl').duration(300).attr('fill',(d,j)=>ins[j]?PAL.rust:'#7b8a80').attr('fill-opacity',(d,j)=>ins[j]?1:.14).attr('r',(d,j)=>ins[j]?5:R.snk);
- capEl.textContent=n+' of '+D.con.length+' construction sites lie within 2 km of this plant. Click it again, or empty space, to clear.'}
+ ppSet(x,y);capEl.textContent=n+' of '+D.con.length+' construction sites, '+ppCount('lakes')+' lakes and '+ppCount('parks')+' parks lie within 2 km of this plant. Click it again, or empty space, to clear.'}
 svg.on('click',ev=>{if(!ixOn)return;const [x,y]=d3.pointer(ev,cam.node()),i=nearApt(x,y);setPick(i===sel?-1:i)})
  .on('mousemove',ev=>{if(!ixOn)return;const [x,y]=d3.pointer(ev,cam.node()),i=nearApt(x,y);if(i<0||i===sel)ixh.attr('r',0);else ixh.attr('cx',AP[i][0]).attr('cy',AP[i][1]).attr('r',R2)})
  .on('mouseleave',()=>ixh.attr('r',0));
@@ -431,7 +446,8 @@ const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targ
 function count(i){if(RM)return;secs[i].querySelectorAll('.num').forEach(el=>{const v=+el.dataset.v,t0=performance.now();(function f(n){const p=Math.min(1,(n-t0)/900);el.textContent=Math.round(v*(1-Math.pow(1-p,3))).toLocaleString('en-IN');if(p<1)requestAnimationFrame(f)})(t0)})}
 const tb=[['Readymix, bricks',66],['Textiles',29],['Plastics',24],['Data centres',19],['Paper and pulp',4.8],['Chemicals',4.0],['Automobile',3.7],['Electrical',3.5]];
 document.getElementById('rbars').innerHTML=[['No reuse at all',8],['One purpose',15],['Two purposes',23],['Three purposes',34],['All four purposes',20]].map(([n,v])=>`<div><span>${n}</span><b style="width:${v/34*100}%;background:${PAL.green}"></b><em>${v}%</em></div>`).join('');
-document.getElementById('tbars').innerHTML=tb.map(([n,v])=>`<div><span>${n}</span><b style="width:${Math.max(2,v/66*100)}%;background:${n==='Data centres'?PAL.violet:PAL.blue}"></b><em>${v}</em></div>`).join('');
+document.getElementById('tbars').innerHTML=tb.map(([n,v])=>`<div><button type="button" class="sn" aria-pressed="false">${n}</button><b style="width:${Math.max(2,v/66*100)}%;background:${n==='Data centres'?PAL.violet:PAL.blue}"></b><em>${v} MLD<small>${Math.round(v/155*100)}% of 155</small></em></div>`).join('');
+document.querySelectorAll('#tbars .sn').forEach(b=>b.addEventListener('click',()=>{const d=b.parentNode,on=!d.classList.contains('on');document.querySelectorAll('#tbars div').forEach(x=>{x.classList.remove('on');x.firstChild.setAttribute('aria-pressed',false)});d.classList.toggle('on',on);b.setAttribute('aria-pressed',on);secPop([...document.querySelectorAll('#tbars div')].indexOf(d),on)}));
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(layout,120)});
 if(!REDUCE&&matchMedia('(pointer:fine)').matches&&innerWidth>860){const mp=document.getElementById('mp');addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--ry',(-7-(e.clientX/innerWidth-.5)*6)+'deg');document.documentElement.style.setProperty('--rx',(2-(e.clientY/innerHeight-.5)*5)+'deg')},{passive:true})}
 layout();cur=-1;sync();secs[0].classList.add('act');
