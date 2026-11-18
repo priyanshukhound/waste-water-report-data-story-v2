@@ -130,18 +130,16 @@ body.pon #scene #mp,body.skon #scene #kt,body.ixon.pon #scene #mp,#scene #mp,#sc
 .rl{margin:14px 0 0;font:600 11px var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--m)}
 .bars div.hasn{}
 #tbars div{grid-template-columns:120px 1fr 0}#tbars .sn{all:unset;cursor:pointer;color:var(--t);border-bottom:1px dotted var(--m);padding:2px 0}#tbars .sn:hover,#tbars .sn:focus-visible{color:var(--h);border-bottom-color:var(--e)}
-#tbars div{position:relative}#tbars em{position:absolute;right:0;top:-26px;background:#fff;color:#202733;padding:3px 8px;border-radius:3px;box-shadow:0 6px 16px -4px rgba(0,0,0,.5);white-space:nowrap;text-align:left;font-size:12px;opacity:0;transform:translateY(6px) scale(.85);transform-origin:100% 100%;transition:opacity .25s,transform .25s;pointer-events:none;z-index:2}
-#tbars em small{display:block;font-weight:400;font-size:10.5px;color:#5d6872}
-#tbars div.on em{opacity:1;transform:none}#tbars div.on b{height:8px}
+#tbars em{display:none}#tbars div.on b{height:8px}#tbars div.on .sn{color:var(--h);font-weight:700;border-bottom-color:var(--e)}
 @media (max-width:860px){#tbars div{grid-template-columns:100px 1fr 0}}
-.pp{transform-box:fill-box;transform-origin:center;animation:ppop .7s ease-out forwards}@keyframes ppop{0%{transform:scale(1)}45%{transform:scale(2.6)}100%{transform:scale(1.5)}}
+#potl .tot{font-weight:700;border-top:1px solid #202733}
 </style>
 <div id="ph"></div><div id="ov"></div>
 <div id="scene"><div id="mp">
 <div class="vw" id="v-chart"><p class="vcap">Where Bengaluru's freshwater comes from, 2025</p><div class="chwrap"><div class="dn"><svg id="donut" viewBox="0 0 300 300" role="img" aria-label="Donut chart: 60% Kaveri supply, 40% groundwater"></svg><div class="dl"><div><i style="background:var(--blue)"></i><b>Kaveri supply</b><span>60% · about 1,680 MLD</span><em>Piped by BWSSB</em></div><div><i style="background:var(--navy)"></i><b>Groundwater</b><span>40% · about 1,120 MLD</span><em>Private and BWSSB wells</em></div></div></div><div class="ab2"><p>Total water demand, MLD</p><div class="ar"><span>2025</span><u><s id="ab25"></s></u><b>2,800</b></div><div class="ar"><span>2035</span><u><s id="ab35"></s></u><b>4,298</b></div></div></div><p class="vnote">Shares are from the brief. MLD split is calculated from 2,800 MLD.</p></div>
 <div class="vw" id="v-table"><p class="vcap">Sewage and its treatment in Bengaluru, 2025</p><div class="chwrap"><table class="tt" id="tt"><thead><tr><th>Stage</th><th>MLD</th><th>Share of sewage</th></tr></thead><tbody></tbody></table></div><p class="vnote">Shares are from the brief. MLD figures are calculated from 2,250 MLD of sewage.</p></div>
 <div class="vw" id="v-stp"><p class="vcap">Overview of on-site sewage treatment plants (STPs) in Bengaluru</p><div class="chwrap"><div class="stpb"><span>Operational on-site STPs</span><b>2,500+</b></div><div class="stpc"><div><svg id="st1" role="img" aria-label="Bar chart: types of technologies, n=194"></svg><p>Types of technologies (n=194)</p></div><div><svg id="st2" role="img" aria-label="Bar chart: treatment capacity, n=194"></svg><p>Treatment capacity (n=194)</p></div></div></div><p class="vnote">Buildings with on-site STPs: residential (about 60%), commercial (malls and hotels) and institutional (business parks, government offices, campuses, hospitals, airports).</p></div>
-<div class="vw" id="v-pot"><p class="vcap">Recycled-water demand by sink, MLD</p><div class="chwrap"><div id="potc"></div><div id="potl"></div></div><p class="vnote">Lakes (dotted, light blue) are not part of the totals: the other sinks add up to 644 MLD (2025) and 1,467 MLD (2035).</p></div>
+<div class="vw" id="v-pot"><p class="vcap">Recycled-water demand by sink, MLD</p><div class="chwrap"><div id="potc"></div><div id="potl"></div></div><p class="vnote">Lakes are counted in the 2025 total (644 MLD) but not in the 2035 total (1,467 MLD), where they are dotted.</p></div>
 <div class="vw on" id="pane"><p id="cap"></p><div id="stage"><svg id="svg" role="img" aria-label="Map of Bengaluru: apartment projects, roads, lakes, parks, construction and industrial sites"></svg><svg id="na" width="22" height="34" viewBox="0 0 22 34" aria-hidden="true"><path d="M11 2 L19 30 L11 24 L3 30 Z" fill="none" stroke="#202733" stroke-width="1.4"/><text x="11" y="15" font-size="9" text-anchor="middle" fill="#202733" font-family="Montserrat,Arial">N</text></svg></div><div id="foot"><svg id="sb" height="34"></svg><div id="leg"></div></div></div></div>
 <div id="kt"><h5>Recycled-water demand by sink, MLD</h5><div id="ktc"></div><div class="sl" id="ktl"></div></div></div>
 </div>
@@ -193,7 +191,7 @@ body.pon #scene #mp,body.skon #scene #kt,body.ixon.pon #scene #mp,#scene #mp,#sc
 <section class="step mp" data-i="6"><div class="card">
 <p class="eyebrow">Industrial sinks</p>
 <h2>Industry wants volume and quality</h2>
-<div class="big"><span>19.4</span><small>MLD for data centre cooling</small></div>
+<div class="big"><span id="ibig">155</span><small id="ilab">MLD industrial reuse demand, 2025</small></div>
 <p>Industry needs tertiary-treated water. About 32 data centres hold 272 MW, and that capacity is expected to double in ten years.</p>
 <div class="bars" id="tbars"></div>
 <!-- <p class="note">Table 3.4, MLD in 2025, total 155. In the shapefile, the median industrial site is 1.2 km from the nearest apartment project, and 9 of 35 are within 1 km.</p> -->
@@ -202,7 +200,7 @@ body.pon #scene #mp,body.skon #scene #kt,body.ixon.pon #scene #mp,#scene #mp,#sc
 <p class="eyebrow">Commercial sinks</p>
 <h2>Cooling and flushing take 134 MLD</h2>
 <p>Over 80 IT parks use 57.8 MLD for cooling and 42.5 MLD for flushing. Hotels need 14.5 and 10 MLD, and malls and high streets 6.2 and 2.9 MLD. Demand is expected to rise to 249 MLD in ten years.</p>
-<p class="note">The map shows 229 hotels, 64 IT parks and 38 malls from the commercial geopackage, clipped to the city boundary.</p>
+<p class="note">The map shows 229 hotels, 64 IT parks and 38 malls</p>
 </div></section>
 <section class="step mp" data-i="8"><div class="card">
 <p class="eyebrow">Construction sinks</p>
@@ -230,12 +228,12 @@ body.pon #scene #mp,body.skon #scene #kt,body.ixon.pon #scene #mp,#scene #mp,#sc
 <h2>644 MLD of demand could take recycled water</h2>
 <p>On-site plants running at full capacity could offset 20% of freshwater demand. Recycled-water demand more than doubles by 2035, and every sink on the previous pages adds to it.</p>
 <div class="kv"><span>Total water demand, 2025 to 2035</span><span>2,800 to 4,298 MLD</span><span>Recycled water demand, 2025 to 2035</span><span>644 to 1,467 MLD</span></div>
-<p class="note">Lakes are dotted and light blue: the 4,298 MLD total for 2035 adds domestic demand and the recycled-water demand of all sinks except lakes, and on-site domestic recycled water is counted in residential demand.</p>
+<p class="note">Lakes are counted in 2025 but dotted in 2035, where they are left out: the 4,298 MLD total for 2035 adds domestic demand and the recycled-water demand of all sinks except lakes, and on-site domestic recycled water is counted in residential demand.</p>
 </div></section>
 <section class="step mp" data-i="12"><div class="card">
 <p class="eyebrow">The whole picture</p>
 <h2>The sources are already beside the sinks</h2>
-<p>Apartments, building sites, parks and lakes share the same neighbourhoods. The plants exist or are being built. Treated water use depends on connecting them. The map shows the 2 km reach of on-site plants against the construction sites.</p>
+<p>Apartments, building sites, parks and lakes share the same neighbourhoods. The plants exist or are being built. Treated water use depends on connecting them. The map shows the 2 km reach of on-site plants against every sink except residential: construction, industrial and commercial.</p>
 <div class="kv"><span>Apartment projects</span><span>1,004</span><span>Construction sites</span><span>769</span><span>Parks and gardens</span><span>2,614</span><span>Lakes</span><span>776</span><span>Industrial sites</span><span>35</span></div>
 <!-- <p class="note">Figures on demand, sewage and reuse come from the project brief. Counts and distances come from the shapefiles: straight-line, measured on a local projection. Records outside the Bengaluru Urban district boundary are clipped out: 1 apartment project, 59 construction sites and 2 lakes.</p> -->
 </div></section>
@@ -245,12 +243,12 @@ const PAL={yellow:'#fcbf2e',violet:'#b94fd0',rust:'#b4513d',blue:'#2f86d6',green
 // the story's animations are its content, so they run even when the system asks for reduced motion; only the looping ambient effects (pings, shimmer, tilt) respect it
 const REDUCE=matchMedia('(prefers-reduced-motion:reduce)').matches,RM=false,K=1;
 const svg=d3.select('#svg'),stage=document.getElementById('stage');
-D.snk=D.con;D.osp=D.apt;D.stpd=D.stp.map((d,i)=>({x:d[0],y:d[1],c:d[2],r:.6+.4*i/D.stp.length}));D.aptE=D.apt.filter(d=>d[2]!==2);D.aptN=D.apt.filter(d=>d[2]===2);
+D.snk=[...D.con.map(d=>[d[0],d[1],'con']),...D.ind.map(d=>[d[0],d[1],'ind']),...D.com.map(d=>[d[0],d[1],'com',d[2]])];D.osp=D.apt;D.stpd=D.stp.map((d,i)=>({x:d[0],y:d[1],c:d[2],r:.6+.4*i/D.stp.length}));D.aptE=D.apt.filter(d=>d[2]!==2);D.aptN=D.apt.filter(d=>d[2]===2);
 const cam=svg.append('g');
 const g={bu:cam.append('g'),roads:cam.append('g'),lakes:cam.append('g'),parks:cam.append('g'),cov:cam.append('g'),osp:cam.append('g'),aptE:cam.append('g'),aptN:cam.append('g'),com:cam.append('g'),con:cam.append('g'),ind:cam.append('g'),snk:cam.append('g'),stp:cam.append('g')};
 const hrg=cam.append('g');let hrd=hrg.selectAll('path');
 const ixg=cam.append('g').attr('pointer-events','none');
-const ixc=ixg.append('circle').attr('r',0).attr('fill','#3aa84a').attr('fill-opacity',.2).attr('stroke','#17702a').attr('stroke-width',2.6).attr('vector-effect','non-scaling-stroke');
+const ixc=ixg.append('circle').attr('r',0).attr('fill','#3aa84a').attr('fill-opacity',.08).attr('stroke','#17702a').attr('stroke-width',2.6).attr('vector-effect','non-scaling-stroke');
 const ixh=ixg.append('circle').attr('r',0).attr('fill','none').attr('stroke','#17702a').attr('stroke-width',1.4).attr('stroke-dasharray','4 3').attr('vector-effect','non-scaling-stroke').attr('opacity',.85);
 let AP=[],CP=[],R2=0,sel=-1,ixOn=false;
 const bdg=cam.append('g').attr('pointer-events','none');
@@ -288,7 +286,7 @@ function layout(){
  const pts=geo([D.bd]);
  proj=d3.geoMercator().fitExtent([[14,18],[W-14,H-6]],pts);
  const path=d3.geoPath(proj);
- R2=2*Math.abs(proj([77.6+1/(111.32*Math.cos(12.97*Math.PI/180)),12.97])[0]-proj([77.6,12.97])[0]);AP=D.apt.map(c=>proj([c[0],c[1]]));CP=D.con.map(c=>proj([c[0],c[1]]));
+ R2=2*Math.abs(proj([77.6+1/(111.32*Math.cos(12.97*Math.PI/180)),12.97])[0]-proj([77.6,12.97])[0]);AP=D.apt.map(c=>proj([c[0],c[1]]));CP=D.snk.map(c=>proj([c[0],c[1]]));
  road=g.roads.selectAll('path').data(RD).join('path').attr('d',d=>path({type:'MultiLineString',coordinates:d.l})).attr('fill','none').attr('stroke-linecap','round').attr('stroke-linejoin','round').attr('stroke',PAL.road).attr('stroke-width',.8).attr('vector-effect','non-scaling-stroke').attr('opacity',shown.roads?1:0);
  hrd=hrg.selectAll('path').data(RD).join('path').attr('d',d=>path({type:'MultiLineString',coordinates:d.l})).attr('fill','none').attr('stroke-linecap','round').attr('stroke-linejoin','round').attr('stroke',d=>d.c===1?'#5d6672':PAL.dark).attr('stroke-width',d=>d.c===2?2.6:d.c===0?1.7:.7).attr('vector-effect','non-scaling-stroke').attr('opacity',0);
  const C=proj([77.595,12.98]),dist=p=>Math.hypot(p[0]-C[0],p[1]-C[1]),mx=Math.min(W,H)*.62;
@@ -325,7 +323,8 @@ const dot=(c,t)=>`<i style="background:${c}"></i>${t}`,pg=(c,t)=>`<i class="pg" 
 const A=o=>({bu:0,osp:0,stp:0,cov:0,snk:0,roads:0,lakes:0,parks:0,aptE:0,aptN:0,com:0,con:0,ind:0,nw:0,...o});
 const NEW=`<i style="background:${PAL.yellow};box-shadow:0 0 0 1.5px ${PAL.navy}"></i>New launch, plant to come`;
 // one entry per page: background photo, panel view, and what the panel shows
-const capDef='Location of potential sinks and coverage by on-site sewage treatment plants (2 km radius) in 2035. Click a circle to highlight the sinks inside it.';
+const SC=d=>d[2]==='con'?PAL.rust:d[2]==='ind'?PAL.violet:CC[1];
+const capDef='Location of potential sinks (all except residential) and coverage by on-site sewage treatment plants (2 km radius) in 2035. Click a circle to highlight the sinks inside it.';
 const steps=[
  {bg:'p1'},
  {bg:'p5',v:'chart'},
@@ -339,7 +338,7 @@ const steps=[
  {bg:'p4',v:'map',sk:3,hi:1,a:A({roads:.9,con:1}),cap:'Roads over new construction sites in Bengaluru',lg:[dot(PAL.rust,'Construction'),ln(PAL.dark,'Primary and trunk'),ln('#5d6672','Tertiary')]},
  {bg:'p4',v:'map',sk:4,a:A({roads:.7,lakes:1,parks:1}),cap:'Lakes and green spaces in Bengaluru',lg:[pg(PAL.blue,'Lakes'),pg(PAL.green,'Green spaces'),ln(PAL.road,'Roads')]},
  {bg:'p4',v:'pot'},
- {bg:'p4',v:'map',ix:1,a:A({roads:.9,lakes:1,parks:1,cov:1,snk:1}),cap:capDef,lg:[pg(PAL.blue,'Lakes'),pg(PAL.green,'Parks and green spaces'),`<i class="pg" style="background:repeating-linear-gradient(45deg,#3aa84a 0 1px,#eaf5ea 1px 4px);border:1px solid #3aa84a"></i>On-site STP coverage (2 km)`,dot('#7b8a80','Sinks: construction sites'),ln(PAL.road,'Roads'),`<i class="pg" style="background:none;border:1.5px solid #111"></i>Bengaluru Urban district`]}];
+ {bg:'p4',v:'map',ix:1,a:A({lakes:1,parks:1,cov:1,snk:1}),cap:capDef,lg:[pg(PAL.blue,'Lakes'),pg(PAL.green,'Parks and green spaces'),`<i class="pg" style="background:repeating-linear-gradient(45deg,#3aa84a 0 1px,#eaf5ea 1px 4px);border:1px solid #3aa84a"></i>On-site STP coverage (2 km)`,dot('#7b8a80','Sinks (not residential)'),dot(PAL.rust,'Construction'),dot(PAL.violet,'Industrial'),dot(CC[1],'Commercial'),`<i class="pg" style="background:none;border:1.5px solid #111"></i>Bengaluru Urban district`]}];
 const PH={p1:'img/p1.jpg',p2:'img/p2.jpg',p3:'img/p3.jpg',p4:'img/p4.jpg',p5:'img/p5.jpg'};
 const phl=document.getElementById('ph');
 phl.innerHTML=Object.entries(PH).map(([k,u])=>`<div class="pi" data-k="${k}" style="background-image:url(${u})"></div>`).join('');
@@ -365,21 +364,16 @@ function playTable(){tt.classList.remove('in');tt.querySelectorAll('s').forEach(
  requestAnimationFrame(()=>{tt.classList.add('in');tt.querySelectorAll('s').forEach((s,i)=>{s.style.transition='';s.style.transitionDelay=(.4+i*.3)*K+'s';s.style.width=s.dataset.w+'%'})})}
 // --- stacked sink charts (Table 3.2 rows, MLD): current sink coloured, earlier ones grey, stacked one by one
 const SK=[{g:0,n:'Residential',c:PAL.yellow,v:[212,603],dk:1},{g:1,n:'Industrial',c:PAL.violet,v:[155,335]},{g:2,n:'Commercial',c:PAL.blue,v:[134,249]},{g:3,n:'Construction',c:PAL.rust,v:[108,200]},{g:4,n:'Greening',c:'#7cc686',v:[35,80],dk:1},{g:4,n:'Lakes',c:'#bfe0f5',v:[35,245],lk:1}];
-let KG=null;
-function secPop(i,on){const sv=KG&&KG.svg;if(!sv)return;sv.selectAll('.sp').remove();if(!on)return;const v=tb[i][1],tot=155,w0=155*KG.sc,x0=KG.x0+212*KG.sc;let off=0;for(let j=0;j<i;j++)off+=tb[j][1];const sx=x0+off/tot*w0,sw=Math.max(2,v/tot*w0),y=KG.top,gp=sv.append('g').attr('class','sp');
- gp.append('rect').attr('x',sx).attr('y',y-2).attr('width',sw).attr('height',KG.bh+4).attr('fill','#fff').attr('fill-opacity',.9).attr('stroke','#fcbf2e').attr('stroke-width',1.5).attr('opacity',0).transition().duration(250).attr('opacity',1);
- const lb=tb[i][0]+' '+v+' MLD',tx=Math.min(Math.max(sx+sw/2,60),KG.x0+2*0+SKMAX*KG.sc),ty=y+KG.bh+KG.gap/2+4;
- const t=gp.append('text').attr('x',sx+sw/2).attr('y',ty-6).attr('text-anchor','middle').attr('font-size',KG.fs).attr('font-weight',700).attr('font-family','Montserrat,Arial').attr('fill','#fcbf2e').attr('opacity',0).text(lb);t.transition().duration(300).ease(d3.easeBackOut).attr('y',ty).attr('opacity',1)}
 const SKMAX=d3.max([0,1],r=>d3.sum(SK.filter(x=>!x.lk),x=>x.v[r])),LKMAX=245,LKGAP=0; // lakes are a separate bar, outside the totals
 function stackChart(box,upto,o){
  box.html('');const W=o.w,bw=W-o.x0-o.pad,H=o.top*2+o.bh*2+o.gap,sc=bw/(SKMAX+LKGAP+LKMAX),segs=SK.filter(x=>x.g<=upto);
- KG={x0:o.x0,sc,top:o.top,bh:o.bh,gap:o.gap,fs:o.fs,svg:null};const sv=box.append('svg').attr('viewBox',`0 0 ${W} ${H}`).attr('role','img').attr('aria-label','Stacked bar chart of recycled-water demand by sink, 2025 and 2035');
- KG.svg=sv;[0,1].forEach(r=>{const y=o.top+r*(o.bh+o.gap);let cum=0,lw=0;
+ const sv=box.append('svg').attr('viewBox',`0 0 ${W} ${H}`).attr('role','img').attr('aria-label','Stacked bar chart of recycled-water demand by sink, 2025 and 2035');
+ [0,1].forEach(r=>{const y=o.top+r*(o.bh+o.gap);let cum=0,lw=0;
   sv.append('text').attr('x',0).attr('y',y+o.bh/2+4).attr('font-size',o.fs).attr('font-weight',600).attr('font-family','Montserrat,Arial').attr('fill',o.txt).text(r?'2035':'2025');
   segs.forEach((x,i)=>{let x0=o.x0+cum*sc;const on=o.all||x.g===upto,w=x.v[r]*sc,inst=o.only&&x.g<upto,d=o.only?250:300+i*420;if(!x.lk)cum+=x.v[r];if(x.lk)lw=x.v[r];
-   const rc=sv.append('rect').attr('x',x0).attr('y',y).attr('height',o.bh).attr('width',inst?w:0).attr('fill',x.lk?(on?'#bfe0f5':o.grey):on?x.c:o.grey).attr('stroke',x.lk?'#2f86d6':o.sep).attr('stroke-dasharray',x.lk?'3 2':null).attr('stroke-width',1);if(!inst)rc.transition().delay(d).duration(520).ease(d3.easeCubicOut).attr('width',w);
+   const rc=sv.append('rect').attr('x',x0).attr('y',y).attr('height',o.bh).attr('width',inst?w:0).attr('fill',x.lk?(on?'#bfe0f5':o.grey):on?x.c:o.grey).attr('stroke',x.lk&&r?'#2f86d6':o.sep).attr('stroke-dasharray',x.lk&&r?'3 2':null).attr('stroke-width',1);if(!inst)rc.transition().delay(d).duration(520).ease(d3.easeCubicOut).attr('width',w);
    if(on&&w>26)sv.append('text').attr('x',x0+w/2).attr('y',y+o.bh/2+4).attr('text-anchor','middle').attr('font-size',o.fs-1).attr('font-weight',600).attr('font-family','Montserrat,Arial').attr('fill',x.dk||x.lk?'#202733':'#fff').attr('opacity',0).text(x.v[r]).transition().delay(d+420).duration(250).attr('opacity',1);});
-  sv.append('text').attr('x',o.x0+(cum+lw)*sc+6).attr('y',y+o.bh/2+4).attr('font-size',o.fs).attr('font-weight',600).attr('font-family','Montserrat,Arial').attr('fill',o.txt).attr('opacity',0).text(cum.toLocaleString('en-IN')+(lw?'*':'')).transition().delay(o.only?850:300+segs.length*420).duration(300).attr('opacity',1)})}
+  sv.append('text').attr('x',o.x0+(cum+lw)*sc+6).attr('y',y+o.bh/2+4).attr('font-size',o.fs).attr('font-weight',600).attr('font-family','Montserrat,Arial').attr('fill',o.txt).attr('opacity',0).text(cum.toLocaleString('en-IN')+(lw&&r?'*':'')).transition().delay(o.only?850:300+segs.length*420).duration(300).attr('opacity',1)})}
 function playKt(g){if(g===undefined)return;const box=document.getElementById('ktc'),W=Math.round(box.clientWidth||600),m=innerWidth<=860;
  stackChart(d3.select(box),g,{only:1,w:W,x0:m?34:44,pad:m?40:50,bh:m?14:22,top:3,gap:m?8:14,fs:m?10:12,grey:'rgba(255,255,255,.24)',sep:'#0b1a38',txt:'#dfe6f1'});
  document.getElementById('ktl').innerHTML=SK.filter(x=>x.g===g).map(x=>`<span><i style="background:${x.c}"></i>${x.n}: <b>${x.v[0]}</b> MLD today, <b>${x.v[1]}</b> by 2035${x.lk?' (dotted, not in totals*)':''}</span>`).join('')}
@@ -387,7 +381,7 @@ function playSk(el,g){if(!el)return;const sel=d3.select(el);sel.html('');sel.app
  stackChart(sel.append('div'),g,{w:400,x0:40,pad:44,bh:24,top:6,gap:20,fs:11,grey:'rgba(255,255,255,.24)',sep:'#0b1a38',txt:'#dfe6f1'});
  sel.append('div').attr('class','sl').html(SK.filter(x=>x.g===g).map(x=>`<i style="background:${x.c}"></i>${x.n}: <b>${x.v[0]}</b> MLD today, <b>${x.v[1]}</b> by 2035${x.lk?' (dotted, not in totals*)':''}`).join('<br>'))}
 function playPot(){stackChart(d3.select('#potc'),4,{w:520,x0:44,pad:50,bh:46,top:8,gap:30,fs:14,all:true,grey:'#d3d9de',sep:'#fff',txt:'#202733'});
- const L=document.getElementById('potl');if(!L.children.length)L.innerHTML='<span></span><span class="h">Sink</span><span class="h">2025</span><span class="h">2035</span>'+SK.map(x=>`<i style="background:${x.c}"></i><span>${x.n}${x.lk?' (dotted, not in total)':''}</span><span class="r">${x.v[0]}</span><span class="r">${x.v[1]}</span>`).join('')}
+ const L=document.getElementById('potl');if(!L.children.length)L.innerHTML='<span></span><span class="h">Sink</span><span class="h">2025</span><span class="h">2035</span>'+SK.map(x=>`<i style="background:${x.c}"></i><span>${x.n}${x.lk?' (2035: dotted, not in total)':''}</span><span class="r">${x.v[0]}</span><span class="r">${x.v[1]}</span>`).join('')+'<span></span><span class="tot">Total (lakes not counted in 2035)</span><span class="r tot">644</span><span class="r tot">1,467</span>'}
 // --- on-site STP overview (page 5): two bar charts from the report figure
 function bars(id,data,col,max,ticks,ylab){const sv=d3.select(id);sv.html('');const W=300,H=230,l=40,b=52,t=22,r=8,pw=W-l-r,ph=H-b-t;sv.attr('viewBox',`0 0 ${W} ${H}`);
  const y=v=>t+ph-v/max*ph,bw=Math.min(52,pw/data.length*.62),x=i=>l+pw/data.length*(i+.5)-bw/2;
@@ -401,16 +395,21 @@ function playStp(){bars('#st1',[['Sequencing|Batch|Reactor',150],['Activated|Slu
  bars('#st2',[['<80',59],['80-250',87],['>250',48]],PAL.navy,100,[0,25,50,75,100],'Capacity (kilolitres per day)')}
 // --- last map: click a 2 km circle to highlight it and the construction sites inside it
 function nearApt(x,y){let b=-1,bd=1e9;AP.forEach((p,i)=>{const d=Math.hypot(p[0]-x,p[1]-y);if(d<bd){bd=d;b=i}});return bd<=R2?b:-1}
+function hitC(t,x,y){const b=t.__b||(t.__b=t.getBBox());
+ if(x<b.x-R2||x>b.x+b.width+R2||y<b.y-R2||y>b.y+b.height+R2)return false;
+ const L=t.getTotalLength(),n=Math.min(120,Math.max(12,Math.ceil(L/(R2/4))));
+ for(let i=0;i<=n;i++){const p=t.getPointAtLength(L*i/n);if(Math.hypot(p.x-x,p.y-y)<=R2)return true}
+ const q=svg.node().createSVGPoint();q.x=x;q.y=y;return t.isPointInFill(q)}
 function ppSet(x,y,all){const fx=all?null:R2;['lakes','parks'].forEach(k=>g[k].selectAll('path').each(function(){const t=this;if(!t.__c){const b=t.getBBox();t.__c=[b.x+b.width/2,b.y+b.height/2]}
-  const inn=!all&&Math.hypot(t.__c[0]-x,t.__c[1]-y)<=R2;t.__in=inn;d3.select(t).classed('pp',inn).interrupt('hl').transition('hl').duration(300).attr('opacity',all||inn?1:.1)}))}
+  const inn=!all&&hitC(t,x,y);t.__in=inn;d3.select(t).classed('pp',inn).interrupt('hl').transition('hl').duration(300).attr('opacity',all||inn?1:.1)}))}
 function ppCount(k){let n=0;g[k].selectAll('path').each(function(){if(this.__in)n++});return n}
 function setPick(i){sel=i;const capEl=document.getElementById('cap');
  if(i<0){ixc.interrupt().transition().duration(250).attr('r',0);g.cov.transition('hl').duration(300).attr('opacity',.9*0+1);snk.transition('hl').duration(300).attr('fill','#7b8a80').attr('fill-opacity',.75).attr('r',R.snk);ppSet(0,0,true);capEl.textContent=capDef;return}
  const [x,y]=AP[i],ins=CP.map(p=>Math.hypot(p[0]-x,p[1]-y)<=R2),n=ins.filter(Boolean).length;
  ixc.attr('cx',x).attr('cy',y).interrupt().attr('r',0).transition().duration(450).ease(d3.easeCubicOut).attr('r',R2);
  g.cov.transition('hl').duration(300).attr('opacity',.3);
- snk.transition('hl').duration(300).attr('fill',(d,j)=>ins[j]?PAL.rust:'#7b8a80').attr('fill-opacity',(d,j)=>ins[j]?1:.14).attr('r',(d,j)=>ins[j]?5:R.snk);
- ppSet(x,y);capEl.textContent=n+' of '+D.con.length+' construction sites, '+ppCount('lakes')+' lakes and '+ppCount('parks')+' parks lie within 2 km of this plant. Click it again, or empty space, to clear.'}
+ snk.transition('hl').duration(300).attr('fill',(d,j)=>ins[j]?SC(d):'#7b8a80').attr('fill-opacity',(d,j)=>ins[j]?1:.14).attr('r',(d,j)=>ins[j]?5:R.snk);
+ ppSet(x,y);const cn=t=>D.snk.filter((d,j)=>ins[j]&&d[2]===t).length;capEl.textContent=cn('con')+' construction, '+cn('ind')+' industrial and '+cn('com')+' commercial sinks, '+ppCount('lakes')+' lakes and '+ppCount('parks')+' parks lie within 2 km of this plant. Click it again, or empty space, to clear.'}
 svg.on('click',ev=>{if(!ixOn)return;const [x,y]=d3.pointer(ev,cam.node()),i=nearApt(x,y);setPick(i===sel?-1:i)})
  .on('mousemove',ev=>{if(!ixOn)return;const [x,y]=d3.pointer(ev,cam.node()),i=nearApt(x,y);if(i<0||i===sel)ixh.attr('r',0);else ixh.attr('cx',AP[i][0]).attr('cy',AP[i][1]).attr('r',R2)})
  .on('mouseleave',()=>ixh.attr('r',0));
@@ -447,7 +446,7 @@ function count(i){if(RM)return;secs[i].querySelectorAll('.num').forEach(el=>{con
 const tb=[['Readymix, bricks',66],['Textiles',29],['Plastics',24],['Data centres',19],['Paper and pulp',4.8],['Chemicals',4.0],['Automobile',3.7],['Electrical',3.5]];
 document.getElementById('rbars').innerHTML=[['No reuse at all',8],['One purpose',15],['Two purposes',23],['Three purposes',34],['All four purposes',20]].map(([n,v])=>`<div><span>${n}</span><b style="width:${v/34*100}%;background:${PAL.green}"></b><em>${v}%</em></div>`).join('');
 document.getElementById('tbars').innerHTML=tb.map(([n,v])=>`<div><button type="button" class="sn" aria-pressed="false">${n}</button><b style="width:${Math.max(2,v/66*100)}%;background:${n==='Data centres'?PAL.violet:PAL.blue}"></b><em>${v} MLD<small>${Math.round(v/155*100)}% of 155</small></em></div>`).join('');
-document.querySelectorAll('#tbars .sn').forEach(b=>b.addEventListener('click',()=>{const d=b.parentNode,on=!d.classList.contains('on');document.querySelectorAll('#tbars div').forEach(x=>{x.classList.remove('on');x.firstChild.setAttribute('aria-pressed',false)});d.classList.toggle('on',on);b.setAttribute('aria-pressed',on);secPop([...document.querySelectorAll('#tbars div')].indexOf(d),on)}));
+document.querySelectorAll('#tbars .sn').forEach(b=>b.addEventListener('click',()=>{const d=b.parentNode,on=!d.classList.contains('on');document.querySelectorAll('#tbars div').forEach(x=>{x.classList.remove('on');x.firstChild.setAttribute('aria-pressed',false)});d.classList.toggle('on',on);b.setAttribute('aria-pressed',on);{const i=[...document.querySelectorAll('#tbars div')].indexOf(d),big=document.getElementById('ibig'),lab=document.getElementById('ilab');big.textContent=on?tb[i][1]:155;lab.textContent=on?'MLD '+tb[i][0].toLowerCase()+' demand, 2025':'MLD industrial reuse demand, 2025'}}));
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(layout,120)});
 if(!REDUCE&&matchMedia('(pointer:fine)').matches&&innerWidth>860){const mp=document.getElementById('mp');addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--ry',(-7-(e.clientX/innerWidth-.5)*6)+'deg');document.documentElement.style.setProperty('--rx',(2-(e.clientY/innerHeight-.5)*5)+'deg')},{passive:true})}
 layout();cur=-1;sync();secs[0].classList.add('act');
