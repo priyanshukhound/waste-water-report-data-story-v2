@@ -358,7 +358,7 @@ function playChart(){
  requestAnimationFrame(()=>requestAnimationFrame(()=>{a.style.transition=b.style.transition='';a.style.width=(2800/4298*100)+'%';b.style.width='100%'}));
 }
 // --- treatment table view (page 3)
-const TR=[['Sewage generated','2,250 ',100,PAL.dark,'100%'],['Treated in central plants','~1,350 ',60,PAL.navy,'60%'],['Treated in on-site plants','~383 ',17,PAL.yellow,'17%'],['Left untreated','~518 ',23,PAL.rust,'23%'],['Reused in the city','~260 ',11.6,PAL.green,'15% of treated']];
+const TR=[['Sewage generated','2,250',100,PAL.dark,'100%'],['Treated in central plants','~1,350',60,PAL.navy,'60%'],['Treated in on-site plants','~383',17,PAL.yellow,'17%'],['Left untreated','~518',23,PAL.rust,'23%'],['Reused in the city','~260',11.6,PAL.green,'15% of treated']];
 const tt=document.getElementById('tt');
 tt.querySelector('tbody').innerHTML=TR.map(r=>`<tr${r[0]==='Sewage generated'?' class="tot"':''}><td>${r[0]}</td><td>${r[1]}</td><td><div><u><s data-w="${r[2]}" style="background:${r[3]}"></s></u><span>${r[4]}</span></div></td></tr>`).join('');
 function playTable(){tt.classList.remove('in');tt.querySelectorAll('s').forEach(s=>{s.style.transition='none';s.style.width='0'});void tt.offsetWidth;
